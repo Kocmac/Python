@@ -1,5 +1,8 @@
 import urllib.request
 import urllib.error
+import socket
+timeout = 10
+socket.setdefaulttimeout(timeout)
 url = urllib.request.Request (input('Paste the url you want to copy: '))
 try:
    with urllib.request.urlopen(url) as response:
