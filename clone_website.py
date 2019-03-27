@@ -3,9 +3,13 @@ import urllib.error
 import socket
 timeout = 10
 socket.setdefaulttimeout(timeout)
-url = urllib.request.Request (input('Paste the url you want to copy: '))
+my_UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:67.0) Gecko/20100101 Firefox/67.0"
+url = input('Paste the url you want to copy: ')
 try:
-   with urllib.request.urlopen(url) as response:
+   headers = {}
+   headers['User-Agent'] = my_UA
+   req = urllib.request.Request(url, headers = headers)
+   with urllib.request.urlopen(req) as response:
       char_set = response.headers.get_content_charset()
       html = response.read().decode(char_set)
    file_name = input("Give the name of the file to be created: ")
@@ -22,3 +26,4 @@ except urllib.error.URLError as e:
 else:
    print("--- {} created ---".format(file_name+"."+file_format))
    
+
