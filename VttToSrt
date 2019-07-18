@@ -1,0 +1,20 @@
+# Converter vtt to srt
+
+import glob, os
+
+os.chdir("C:\\Users\\Kocmac\\Desktop\\..........")
+
+for file in glob.glob("*.vtt"):
+    try:
+        fin = open(file, "rt")
+        data = fin.read()
+        data = data.replace('WEBVTT', ' ')
+        fin.close()
+
+        fin = open(file, "wt")
+        fin.write(data)
+        fin.close()
+        base = os.path.splitext(file)[0]
+        os.rename(file, base + '.srt')
+    except FileExistsError:
+        continue
